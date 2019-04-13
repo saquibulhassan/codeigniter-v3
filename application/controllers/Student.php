@@ -6,7 +6,10 @@ class Student extends CI_Controller
 
     public function index()
     {
-        $this->load->view('student/list');
+        $this->load->database();
+        $data['students'] = $this->db->get('student')->result();
+
+        $this->load->view('student/list', $data);
     }
 
     public function create()
@@ -47,5 +50,13 @@ class Student extends CI_Controller
             redirect('student/create?status=success');
         }
 
+    }
+
+    public function delete($id)
+    {
+        $this->load->database();
+        $this->db->delete('student', ['id' => $id]);
+
+        redirect('student?status=delete_success');
     }
 }

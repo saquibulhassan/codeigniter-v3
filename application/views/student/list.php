@@ -22,6 +22,12 @@
         </div>
 
         <div class="col-sm-12">
+            <?php if($this->input->get('status') == 'delete_success'): ?>
+                <div class="alert alert-success">
+                    <strong>Success!</strong> Data successfully deleted
+                </div>
+            <?php endif ?>
+
             <table class="table table-bordered table-condensed table-striped table-hover">
                 <thead>
                 <tr>
@@ -34,23 +40,34 @@
                 </tr>
                 </thead>
                 <tbody>
+                <?php $i = 1; foreach ($students as $std): ?>
                 <tr>
-                    <td class="text-center">1</td>
-                    <td>Mr. XYZ</td>
-                    <td>Mr. ABC</td>
-                    <td class="text-center">Class 1</td>
-                    <td class="text-center">5</td>
+                    <td class="text-center"><?php echo $i++ ?></td>
+                    <td><?php echo $std->name ?></td>
+                    <td><?php echo $std->father_name ?></td>
+                    <td class="text-center"><?php echo $std->class ?></td>
+                    <td class="text-center"><?php echo $std->roll ?></td>
                     <td class="text-center">
                         <a href="#" class="btn btn-info btn-sm">Edit</a>
-                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                        <a onclick="std_delete(<?php echo $std->id ?>)" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
+<script>
+    function std_delete(id) {
+        var x = confirm("Are you sure to delete?");
+
+        if(x) {
+            location.replace("<?php echo site_url('student/delete/') ?>"+id);
+        }
+    }
+</script>
 
 </body>
 </html>
