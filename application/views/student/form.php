@@ -22,43 +22,52 @@
         </div>
 
         <div class="col-sm-6 col-sm-offset-3">
-            <form action="<?php echo site_url('student/save') ?>" class="form-horizontal">
+            <form method="post" action="<?php echo site_url('student/save') ?>" class="form-horizontal">
+
+                <?php if($this->input->get('status') == 'success'): ?>
+                <div class="alert alert-success">
+                    <strong>Success!</strong> Data successfully inserted
+                </div>
+                <?php endif ?>
+
+                <?php echo validation_errors(); ?>
+
                 <div class="form-group">
                     <label for="name">Student Name</label>
-                    <input type="text" name="name" id="name" class="form-control">
+                    <input type="text" name="name" id="name" class="form-control" value="<?php echo set_value('name'); ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="father_name">Father Name</label>
-                    <input type="text" name="father_name" id="father_name" class="form-control">
+                    <input type="text" name="father_name" id="father_name" class="form-control" value="<?php echo set_value('father_name'); ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="mother_name">Mother Name</label>
-                    <input type="text" name="mother_name" id="mother_name" class="form-control">
+                    <input type="text" name="mother_name" id="mother_name" class="form-control" value="<?php echo set_value('mother_name'); ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" name="email" id="email" class="form-control">
+                    <input type="email" name="email" id="email" class="form-control" value="<?php echo set_value('email'); ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone</label>
-                    <input type="text" name="phone" id="phone" class="form-control">
+                    <input type="text" name="phone" id="phone" class="form-control" value="<?php echo set_value('phone'); ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <textarea name="address" id="address" class="form-control"></textarea>
+                    <textarea name="address" id="address" class="form-control" required><?php echo set_value('address'); ?></textarea>
                 </div>
                 <div class="form-group">
                     <label for="class">Class</label>
-                    <select name="class" id="class" class="form-control">
-                        <option value="">Select Class</option>
-                        <option value="1">Class 1</option>
-                        <option value="2">Class 2</option>
-                        <option value="3">Class 3</option>
+                    <select name="class" id="class" class="form-control" required>
+                        <option value="" <?php echo set_select('class', ''); ?> >Select Class</option>
+                        <option value="1" <?php echo set_select('class', 1); ?> >Class 1</option>
+                        <option value="2" <?php echo set_select('class', 2); ?> >Class 2</option>
+                        <option value="3" <?php echo set_select('class', 3); ?> >Class 3</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="roll">Roll</label>
-                    <input type="text" name="roll" id="roll" class="form-control">
+                    <input type="text" name="roll" id="roll" class="form-control" value="<?php echo set_value('roll'); ?>" required>
                 </div>
                 <div class="form-group text-center">
                     <button type="submit" class="btn btn-success">Save</button>
