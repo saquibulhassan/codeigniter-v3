@@ -28,6 +28,12 @@
                 </div>
             <?php endif ?>
 
+            <?php if($this->input->get('status') == 'update_success'): ?>
+                <div class="alert alert-success">
+                    <strong>Success!</strong> Data successfully updated
+                </div>
+            <?php endif ?>
+
             <table class="table table-bordered table-condensed table-striped table-hover">
                 <thead>
                 <tr>
@@ -48,7 +54,7 @@
                     <td class="text-center"><?php echo $std->class ?></td>
                     <td class="text-center"><?php echo $std->roll ?></td>
                     <td class="text-center">
-                        <a href="#" class="btn btn-info btn-sm">Edit</a>
+                        <a href="<?php echo site_url('student/edit/' . $std->id) ?>" class="btn btn-info btn-sm">Edit</a>
                         <a onclick="std_delete(<?php echo $std->id ?>)" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>
