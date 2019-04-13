@@ -3,10 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Student extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->load->database();
+        $this->load->library('form_validation');
+    }
 
     public function index()
     {
-        $this->load->database();
         $data['students'] = $this->db->get('student')->result();
 
         $this->load->view('student/list', $data);
@@ -14,15 +20,11 @@ class Student extends CI_Controller
 
     public function create()
     {
-        $this->load->library('form_validation');
-
         $this->load->view('student/form');
     }
 
     public function save()
     {
-        $this->load->library('form_validation');
-
         $this->form_validation->set_rules('name', 'name', 'required');
         $this->form_validation->set_rules('father_name', 'father name', 'required');
         $this->form_validation->set_rules('mother_name', 'mother name', 'required');
@@ -44,7 +46,6 @@ class Student extends CI_Controller
             $data['class']       = $this->input->post('class');
             $data['roll']        = $this->input->post('roll');
 
-            $this->load->database();
             $this->db->insert('student', $data);
 
             redirect('student/create?status=success');
@@ -54,7 +55,6 @@ class Student extends CI_Controller
 
     public function delete($id)
     {
-        $this->load->database();
         $this->db->delete('student', ['id' => $id]);
 
         redirect('student?status=delete_success');
